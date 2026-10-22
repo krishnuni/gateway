@@ -1,0 +1,83 @@
+{
+  "python": "3.12.14",
+  "scipy": "1.18.1",
+  "cases": [
+    {
+      "mu": 0.01215058560962404,
+      "point": 1,
+      "wasm_ms": 101.662,
+      "orbit_state_error": 5.4828468154521914e-12,
+      "matrix_relative_error": 2.5643276884960095e-11,
+      "unstable_multiplier_error": 2.3765133348928235e-11,
+      "stable_multiplier_error": 4.4247236198967775e-10,
+      "closure": 7.616348957767416e-13,
+      "jacobi_drift": 6.263656260330208e-11,
+      "symplectic_defect": 1.3037295662075843e-09,
+      "reciprocity_error": 5.578527639826802e-10,
+      "short_manifold_state_error": 3.2527452953345914e-13,
+      "section_y_residual": 3.311023330510032e-14
+    },
+    {
+      "mu": 0.01215058560962404,
+      "point": 2,
+      "wasm_ms": 60.8698,
+      "orbit_state_error": 1.648680812097597e-12,
+      "matrix_relative_error": 1.6861238640863173e-11,
+      "unstable_multiplier_error": 1.9349227441629496e-11,
+      "stable_multiplier_error": 1.862488869532888e-11,
+      "closure": 9.801465195025116e-13,
+      "jacobi_drift": 3.5083047578154947e-13,
+      "symplectic_defect": 2.326251350525983e-09,
+      "reciprocity_error": 3.239357670992149e-10,
+      "short_manifold_state_error": 3.771497003590696e-13,
+      "section_y_residual": 2.6956518614507097e-15
+    },
+    {
+      "mu": 0.000953881151934512,
+      "point": 1,
+      "wasm_ms": 58.045000000000016,
+      "orbit_state_error": 2.1322948289860533e-12,
+      "matrix_relative_error": 2.725580414877089e-11,
+      "unstable_multiplier_error": 2.53342555010885e-11,
+      "stable_multiplier_error": 1.777263229050674e-09,
+      "closure": 3.0501180276138254e-11,
+      "jacobi_drift": 5.731415342324908e-12,
+      "symplectic_defect": 2.380512712015992e-09,
+      "reciprocity_error": 9.690093172309844e-10,
+      "short_manifold_state_error": 1.749086986357895e-13,
+      "section_y_residual": 2.305515262208957e-14
+    },
+    {
+      "mu": 0.000953881151934512,
+      "point": 2,
+      "wasm_ms": 67.83160000000004,
+      "orbit_state_error": 1.1841155429770898e-12,
+      "matrix_relative_error": 2.223152099045019e-11,
+      "unstable_multiplier_error": 2.4120449091875623e-11,
+      "stable_multiplier_error": 1.716220838720228e-09,
+      "closure": 7.231676466424447e-13,
+      "jacobi_drift": 9.667822098435863e-12,
+      "symplectic_defect": 2.244170758747852e-09,
+      "reciprocity_error": 1.0717937648507814e-10,
+      "short_manifold_state_error": 1.912150993099715e-13,
+      "section_y_residual": 9.95297594341693e-16
+    }
+  ],
+  "convergence": [
+    {
+      "rtol": 1e-08,
+      "state_error": 1.7909436600405115e-08,
+      "jacobi_drift": 3.9039166122023516e-08
+    },
+    {
+      "rtol": 1e-10,
+      "state_error": 1.7063661594818313e-10,
+      "jacobi_drift": 3.9097258763831633e-10
+    },
+    {
+      "rtol": 1e-12,
+      "state_error": 1.5656365093263958e-12,
+      "jacobi_drift": 3.750777466393629e-12
+    }
+  ]
+}

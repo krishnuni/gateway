@@ -1,0 +1,14 @@
+node_modules/
+dist/
+rust/target/
+test-results/
+playwright-report/
+reference/__pycache__/
+.env*
+!.env.example
+public/engine/*.wasm
+public/engine/*.json
+docs/validation-local.json
+docs/verification-input.json
+*.tsbuildinfo
+planning/

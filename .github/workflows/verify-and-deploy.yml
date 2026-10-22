@@ -1,0 +1,78 @@
+name: Verify and deploy Gateway
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gateway-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install pinned Rust toolchain
+        run: rustup show
+      - name: Install dependencies
+        run: |
+          npm ci
+          python -m pip install -r reference/requirements.txt
+          npx playwright install --with-deps chromium
+      - name: Native checks
+        run: |
+          cargo fmt --manifest-path rust/Cargo.toml -- --check
+          cargo test --manifest-path rust/Cargo.toml
+      - name: Production build and WASM regression tests
+        run: |
+          npm run build
+          npm test
+      - name: Independent DOP853 reference
+        run: |
+          npm run verify
+          python reference/validate.py
+      - name: Production browser journeys and render measurement
+        run: npm run test:production
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: gateway-verification
+          path: |
+            docs/validation-local.json
+            docs/render-benchmark.json
+            docs/screenshots/
+            test-results/
+          retention-days: 14
+      - name: Configure Pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+      - name: Upload tested site
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish verified artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
